@@ -1,0 +1,210 @@
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #fff0f6, #eee5ff);
+  color: #352449;
+  min-height: 100vh;
+}
+
+/* Main Container */
+.container {
+  width: calc(100% - 30px);
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 35px;
+  background: #ffffff;
+  border-radius: 22px;
+  box-shadow: 0 10px 35px rgba(145, 75, 180, 0.16);
+}
+
+/* Heading */
+h1 {
+  text-align: center;
+  color: #8738a8;
+  font-size: 30px;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+/* Description */
+.container > p {
+  text-align: center;
+  color: #806b8c;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+/* Question Card */
+.question {
+  margin: 24px 0;
+  padding: 20px;
+  background: #fff5fa;
+  border: 1px solid #f3d5ed;
+  border-radius: 14px;
+}
+
+/* Question Title */
+.question-title {
+  display: block;
+  color: #663b80;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.6;
+  text-align: left;
+  margin: 0 0 15px;
+}
+
+/* Radio Options */
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  width: 100%;
+  min-height: 46px;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border: 1px solid #ead9f5;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #493456;
+  cursor: pointer;
+  font-weight: normal;
+  text-align: left;
+  line-height: 1.5;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.option:hover {
+  background: #fff0f7;
+  border-color: #c77bd9;
+}
+
+/* Radio Button */
+.option input[type="radio"] {
+  flex: 0 0 17px;
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  accent-color: #a83bb8;
+  cursor: pointer;
+}
+
+/* Option Text */
+.option span {
+  flex: 1;
+  min-width: 0;
+  color: #493456;
+  text-align: left;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* Keyboard Accessibility */
+.option:focus-within {
+  outline: 2px solid #c77bd9;
+  outline-offset: 2px;
+}
+
+/* Buttons */
+button {
+  display: inline-block;
+  padding: 13px 20px;
+  margin: 8px 8px 0 0;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #a83bb8, #7141c8);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(130, 55, 175, 0.25);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Links */
+a {
+  color: #8738a8;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Success Message */
+.success {
+  padding: 12px;
+  margin: 15px 0;
+  border-radius: 9px;
+  background: #e9f9ed;
+  color: #216b35;
+  line-height: 1.5;
+}
+
+/* Error Message */
+.error {
+  padding: 12px;
+  margin: 15px 0;
+  border-radius: 9px;
+  background: #fff0f0;
+  color: #b42318;
+  line-height: 1.5;
+}
+
+/* Keyboard Focus */
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #e58acb;
+  outline-offset: 3px;
+}
+
+/* Responsive Design */
+@media (max-width: 700px) {
+  .container {
+    margin: 15px auto;
+    padding: 22px 18px;
+    border-radius: 16px;
+  }
+
+  h1 {
+    font-size: 25px;
+  }
+
+  .question {
+    padding: 15px;
+    margin: 18px 0;
+  }
+
+  .question-title {
+    font-size: 15px;
+  }
+
+  .option {
+    padding: 11px;
+    gap: 10px;
+  }
+
+  button {
+    width: 100%;
+    margin: 8px 0 0;
+  }
+}
