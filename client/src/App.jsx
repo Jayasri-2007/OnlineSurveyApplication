@@ -79,11 +79,11 @@ function App() {
       answer: answers[index]
     }));
 
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/api/feedback",
-        { responses }
-      );
+   try {
+  const response = await axios.post(
+    "https://online-survey-api.onrender.com/api/feedback",
+    { responses }
+  );
 
       setMessage(response.data.message);
       setQuestions(getRandomQuestions());
