@@ -30,7 +30,12 @@ const questionBank = [
   },
   {
     question: "What is your career goal?",
-    options: ["Software Developer", "Web Developer", "Data Analyst", "UI/UX Designer"]
+    options: [
+      "Software Developer",
+      "Web Developer",
+      "Data Analyst",
+      "UI/UX Designer"
+    ]
   },
   {
     question: "Do you participate in college events?",
@@ -64,6 +69,7 @@ function App() {
   const [questions, setQuestions] = useState(getRandomQuestions);
   const [answers, setAnswers] = useState(["", "", "", "", ""]);
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -79,37 +85,49 @@ function App() {
       answer: answers[index]
     }));
 
-   try {
-  const response = await axios.post(
-    "https://online-survey-api.onrender.com/api/feedback",
-    { responses }
-  );
+    try {
+      setLoading(true);
 
-      setMessage(response.data.message);
-      setQuestions(getRandomQuestions());
-      setAnswers(["", "", "", "", ""]);
+      const response = await axios.post(
+        "https://online-survey-api.onrender.com/api/feedback",
+        { responses }
+      );
+
+      if (response.status === 200 || response.status === 201) {
+        setMessage("Survey Submitted Successfully!");
+        setQuestions(getRandomQuestions());
+        setAnswers(["", "", "", "", ""]);
+      }
     } catch (error) {
+      console.error("Submit Error:", error);
+
       setMessage(
         error.response?.data?.message ||
-        "Unable to submit survey. Please check the backend."
+        "Unable to submit survey. Please try again."
       );
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="container">
+
       <h1>Online Survey Application</h1>
       <p>Select one option for each question.</p>
 
       <form onSubmit={handleSubmit}>
+
         {questions.map((item, index) => (
           <div className="question" key={item.question}>
+
             <p className="question-title">
               {index + 1}. {item.question}
             </p>
 
             {item.options.map((option) => (
               <label className="option" key={option}>
+
                 <input
                   type="radio"
                   name={`question-${index}`}
@@ -119,18 +137,25 @@ function App() {
                     const updatedAnswers = [...answers];
                     updatedAnswers[index] = option;
                     setAnswers(updatedAnswers);
+                    setMessage("");
                   }}
                 />
+
                 <span>{option}</span>
+
               </label>
             ))}
+
           </div>
         ))}
 
-        <button type="submit">Submit Survey</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Submitting..." : "Submit Survey"}
+        </button>
 
         <button
           type="button"
+          disabled={loading}
           onClick={() => {
             setQuestions(getRandomQuestions());
             setAnswers(["", "", "", "", ""]);
@@ -140,12 +165,20 @@ function App() {
           Get New Questions
         </button>
 
-        {message && <p role="status">{message}</p>}
+        {message && (
+          <p role="status">
+            {message}
+          </p>
+        )}
+
       </form>
 
       <p>
-        <a href="/responses.html">View Submitted Surveys</a>
+        <a href={`${import.meta.env.BASE_URL}responses.html`}>
+          View Submitted Surveys
+        </a>
       </p>
+
     </div>
   );
 }
